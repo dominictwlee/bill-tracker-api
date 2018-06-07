@@ -20,3 +20,5 @@ initDatabase()
     console.error('Failed connection to database');
     console.error(err);
   });
+
+module.exports = app;

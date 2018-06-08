@@ -6,16 +6,14 @@
   "scripts": {
     "start": "node server.js",
     "start:watch": "nodemon server.js",
-    "test": "jest --detectOpenHandles"
-  },
-  "jest": {
-    "testEnvironment": "node"
+    "test": "set NODE_ENV=test && mocha"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "mongodb": "^3.0.10"
   },
@@ -24,7 +22,8 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.12.0",
-    "jest": "^23.1.0",
+    "expect": "^23.1.0",
+    "mocha": "^5.2.0",
     "prettier": "^1.13.4",
     "supertest": "^3.1.0"
   }

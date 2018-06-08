@@ -12,6 +12,10 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 3000;
 
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
+
 initDatabase()
   .then(db => {
     billRoutes(app, db).listen(port, () => console.log(`Server listening on port ${port}`));

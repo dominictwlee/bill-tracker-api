@@ -6,8 +6,8 @@ module.exports = (app, db) => {
   router.post('/', (req, res) => {
     db.collection('bills')
       .insertOne(req.body)
-      .then(result => res.json(result))
-      .catch(err => console.log(err));
+      .then(result => res.status(200).json(result))
+      .catch(err => res.status(400).json(err.message));
   });
 
   app.use('/api/bills', router);

@@ -1,18 +1,20 @@
 const request = require('supertest'); // eslint-disable-line
 const app = require('../server');
 
-describe('POST api/bills', () => {
-  const bill = 'stuff';
-  test('It should return a 200 JSON response', done => {
+describe('GET /', () => {
+  test('should return hello world', done => {
+    request(app)
+      .get('/')
+      .expect(200)
+      .end(done);
+  });
+});
+
+describe('POST /api/bills', () => {
+  test('should return POST result', done => {
     request(app)
       .post('/api/bills')
-      .send({ bill })
       .expect(200)
-      .end(err => {
-        if (err) {
-          return done(err);
-        }
-        done();
-      });
+      .end(done);
   });
 });

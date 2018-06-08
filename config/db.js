@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 const url = 'mongodb://localhost:27017';
-const dbName = process.env.DB_NAME;
+const dbName = process.env.NODE_ENV === 'test' ? 'billtrackertest' : 'billtracker';
 
 module.exports = () =>
   MongoClient.connect(url).then(client => {
@@ -14,15 +14,14 @@ module.exports = () =>
             validator: {
               $jsonSchema: {
                 bsonType: 'object',
-                required: ['bill', 'cost'],
                 properties: {
                   bill: {
                     type: 'string',
-                    description: 'Must be a string and is required',
+                    description: 'Must be a string',
                   },
                   cost: {
                     type: 'number',
-                    description: 'Must be a number and is required',
+                    description: 'Must be a number',
                   },
                 },
               },

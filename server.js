@@ -1,6 +1,3 @@
-require('dotenv').config();
-require('./config/config');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -21,7 +18,14 @@ app.get('/', (req, res) => {
 
 initDatabase()
   .then(db => {
-    billRoutes(app, db).listen(port, () => console.log(`Server listening on port ${port}`));
+    billRoutes(app, db);
+
+    app.use((err, req, res) => {
+      console.log(err.stack);
+      res.status(400).json({ error: err.message });
+    });
+
+    app.listen(port, () => console.log(`Server listening on port ${port}`));
   })
   .catch(err => {
     console.error('Failed connection to database');

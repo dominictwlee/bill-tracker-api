@@ -30,6 +30,14 @@ module.exports = (app, db) => {
       .catch(next);
   });
 
+  router.delete('/:id', (req, res, next) => {
+    const { id } = req.params;
+    db.collection('bills')
+      .findOneAndDelete({ _id: id })
+      .then(result => res.status(200).json(result))
+      .catch(next);
+  });
+
   app.use('/api/bills', router);
   return app;
 };

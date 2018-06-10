@@ -1,10 +1,11 @@
 const request = require('supertest');
 const expect = require('expect');
 
-const populateBills = require('./seed');
+const { populateBills, testObjId } = require('./seed');
 const app = require('../server');
 
-before(populateBills);
+beforeEach(populateBills);
+const stringId = testObjId.toHexString();
 
 describe('POST /api/bills', () => {
   it('should return POST result', done => {
@@ -22,8 +23,29 @@ describe('GET /api/bills', () => {
       .get('/api/bills')
       .expect(200)
       .expect(res => {
-        expect(res.body).toHaveLength(4);
+        expect(res.body).toHaveLength(3);
       })
+      .end(done);
+  });
+});
+
+describe('PATCH /api/bills/:id', () => {
+  console.log(stringId);
+  it('should return an updated item', done => {
+    request(app)
+      .patch(`/api/bills/${stringId}`)
+      .send({ bill: 'testBill' })
+      .expect(200)
+      .end(done);
+  });
+});
+
+describe('DELETE /api/bills/:id', () => {
+  console.log(stringId);
+  it('should return value of item deleted', done => {
+    request(app)
+      .delete(`/api/bills/${stringId}`)
+      .expect(200)
       .end(done);
   });
 });

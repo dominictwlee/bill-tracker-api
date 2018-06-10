@@ -1,7 +1,11 @@
 const initDatabase = require('../config/db');
+const { ObjectID } = require('mongodb');
+
+const testObjId = new ObjectID();
 
 const bills = [
   {
+    _id: testObjId,
     bill: 'electricity',
     cost: 40,
     paid: false,
@@ -32,4 +36,4 @@ const populateBills = done => {
   });
 };
 
-module.exports = populateBills;
+module.exports = { populateBills, testObjId };

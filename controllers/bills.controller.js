@@ -6,9 +6,10 @@ const handleCreate = (db, colName, req, res, next) => {
     .catch(next);
 };
 
-const handleRead = (db, colName, query, req, res, next) => {
+const handleRead = (db, colName, req, res, next) => {
+  const queryString = req.query;
   db.collection(colName)
-    .find(query)
+    .find(queryString)
     .toArray()
     .then(result => res.status(200).json(result))
     .catch(next);

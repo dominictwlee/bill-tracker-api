@@ -7,7 +7,7 @@ module.exports = (app, db) => {
 
   router.post('/', handleCreate.bind(null, db, 'bills'));
 
-  router.get('/', handleRead.bind(null, db, 'bills', {}));
+  router.get('/', handleRead.bind(null, db, 'bills'));
 
   router.patch('/:id', handleUpdate.bind(null, db, 'bills'));
 
